@@ -1,0 +1,14 @@
+<html>
+<body>
+<h1>ADD</h1>
+<form method="POST" action="/addEtude" >
+     
+      domain  : <input type="text" name="domain"  th:value="${EtudeQuantitative.getDomain()}"/> <br> 
+      reserve  : <input type="text" name ="reserve" th:value="${ParametreGeo.getReserve()}" /> <br> 
+      qualiteSi  : <input type="text" name="qualiteSi" /> <br> 
+     qualiteFe : <input type="text" name="qualiteFe" /> <br> 
+    <input type="submit" value="submit" />
+</form>
+
+</body>
+</html>
