@@ -3,7 +3,6 @@ package com.example.demo.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,32 +10,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Models.Famille;
-import com.example.demo.Repo.FamilleRepo;
+import com.example.demo.Models.FamilleMachine;
+import com.example.demo.Repo.FamilleMachineRepo;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-public class FamilleController {
-	
-	@Autowired(required=true)
-	FamilleRepo rep;
-	
+public class FamilleMachineController {
 
-	@GetMapping("/showAllfamilleProduit")
-    public List<Famille> getAll(){
-        List <Famille> familleProduit = this.rep.findAll();
-        return familleProduit;
-    }
-@RequestMapping(value = "/createfamilleProduits",method = RequestMethod.POST,consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@Autowired(required=true)
+	FamilleMachineRepo rep ;
 	
-	public Famille add(@RequestBody  Famille familleProduit ){
-		
+	@GetMapping("/showAllFamilleMachine")
+    public List<FamilleMachine> getAll(){
+        List <FamilleMachine> e = this.rep.findAll();
+        return e;
+    }
+	@RequestMapping(value = "/addFamilleMachine",method = RequestMethod.POST)
+    public FamilleMachine create(@RequestBody FamilleMachine familleMachine){
 	  try {
-		  Famille fp = rep.save(familleProduit);
-        return fp ; }
+		  FamilleMachine e = rep.save(familleMachine);
+        return e ; }
 	  catch(Exception E){
-		  return null ;
+		  return familleMachine ;
 	  }
     }
-
 }

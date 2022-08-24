@@ -28,19 +28,25 @@ public class Magasins {
 	private double largeur ;
 	@Column(name="longueur")
 	private double longueur;
+	@Column(name="famille")
+	private String famille;
+	
 
-	@ManyToOne (cascade=CascadeType.ALL)
-    @JoinColumn(name = "familleProduit", referencedColumnName = "idFamilleProduit")
-	private FamilleProduit familleProduit;
 
-	public Magasins(String designation, double hauteur, double largeur, double longueur,
-			FamilleProduit familleProduit) {
+	public String getFamille() {
+		return famille;
+	}
+	public void setFamille(String famille) {
+		this.famille = famille;
+	}
+	
+	public Magasins(String designation, double hauteur, double largeur, double longueur, String famille) {
 		super();
 		this.designation = designation;
 		this.hauteur = hauteur;
 		this.largeur = largeur;
 		this.longueur = longueur;
-		this.familleProduit = familleProduit;
+		this.famille = famille;
 	}
 	public Magasins() {}
 	public String getId_Magasins() {
@@ -72,12 +78,6 @@ public class Magasins {
 	}
 	public void setLongueur(double longueur) {
 		this.longueur = longueur;
-	}
-	public FamilleProduit getFamilleProduit() {
-		return familleProduit;
-	}
-	public void setFamilleProduit(FamilleProduit familleProduit) {
-		this.familleProduit = familleProduit;
 	}
 	
 	

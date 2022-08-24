@@ -2,6 +2,7 @@ package com.example.demo.Controllers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -41,7 +42,21 @@ public class ParametreGeoController {
         List <ParametreGeo> p = this.rep.findAll();
         return p;
     }
-	
+	 @GetMapping("getfile/{id}")
+	    public ResponseEntity<byte[]> getFilepara(@PathVariable String id) {
+	        Optional<ParametreGeo> p = this.rep.findById(id);
+
+	        if (!p.isPresent()) {
+	            return ResponseEntity.notFound()
+	                                 .build();
+	        }
+
+	        ParametreGeo fileEntity = p.get();
+	        return ResponseEntity.ok()
+	                             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileEntity.getCarte().getName() + "\"")
+	                             .contentType(MediaType.valueOf(fileEntity.getCarte().getContentType()))
+	                             .body(fileEntity.getCarte().getCertif());
+	    }
 	@PostMapping(value = "/addparametre",consumes = MediaType.MULTIPART_FORM_DATA_VALUE, 
 		    produces = MediaType.APPLICATION_JSON_VALUE)
 	

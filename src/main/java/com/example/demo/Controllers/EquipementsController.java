@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,15 @@ public class EquipementsController {
         return e;
     }
 	
+	@GetMapping("/machines/{id}")
+    public Optional<Equipements> getMachine(@PathVariable String id){
+        Optional<Equipements> machine = this.rep.findById(id);
+        if (machine != null) {
+        	machine.get().setId(null) ;
+        	return machine;					
+        }
+        else return null ; 
+    }
 	@RequestMapping(value = "/addEquipements",method = RequestMethod.POST)
     public Equipements create(@RequestBody Equipements equipements){
 	  try {

@@ -21,21 +21,23 @@ public class ProduitSemiFini {
 	private String id_Produit_Semi_Fini ;
 	@Column(name="designation")
 	private String designation;
-	@OneToOne
-    @JoinColumn(name = "idFamilleProduit", referencedColumnName = "idFamilleProduit")
-	private FamilleProduit familleProduit;
-	@OneToOne
-    @JoinColumn(name = "idSousFamille", referencedColumnName = "idSousFamille")
-	private SousFamille sousfamille;
+	@Column(name="sousfamille")
+	private String sousfamille;
+	@Column(name="famille")
+	private String famille;
 	
 	public ProduitSemiFini() {}
 
-	public ProduitSemiFini(String designation, FamilleProduit familleProduit, SousFamille sousfamille) {
+	
+
+	public ProduitSemiFini(String designation, String sousfamille, String famille) {
 		super();
 		this.designation = designation;
-		this.familleProduit = familleProduit;
 		this.sousfamille = sousfamille;
+		this.famille = famille;
 	}
+
+
 
 	public String getId_Produit_Semi_Fini() {
 		return id_Produit_Semi_Fini;
@@ -53,20 +55,28 @@ public class ProduitSemiFini {
 		this.designation = designation;
 	}
 
-	public FamilleProduit getFamilleProduit() {
-		return familleProduit;
-	}
 
-	public void setFamilleProduit(FamilleProduit familleProduit) {
-		this.familleProduit = familleProduit;
-	}
 
-	public SousFamille getSousfamille() {
+	public String getSousfamille() {
 		return sousfamille;
 	}
 
-	public void setSousfamille(SousFamille sousfamille) {
+
+
+	public void setSousfamille(String sousfamille) {
 		this.sousfamille = sousfamille;
+	}
+
+
+
+	public String getFamille() {
+		return famille;
+	}
+
+
+
+	public void setFamille(String famille) {
+		this.famille = famille;
 	}
 	
 	

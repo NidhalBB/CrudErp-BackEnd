@@ -30,6 +30,6 @@ public class SousFamilleController {
 @RequestMapping(value = "/createSousfamille",method = RequestMethod.POST,consumes = {MediaType.APPLICATION_JSON_VALUE})
 	
 	public SousFamille add(@RequestBody  SousFamille sousFamille ){
-		return this.rep.save(sousFamille);
+	return this.rep.save(sousFamille);
 	}
 }

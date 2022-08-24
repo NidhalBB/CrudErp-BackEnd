@@ -4,9 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -21,12 +18,12 @@ public class MatiereAcquise {
 	private String id_Matiere ;
 	@Column(name="designation")
 	private String designation;
-	@ManyToOne
-	private FamilleProduit familleProduit;
-	@ManyToOne
-	private Fournisseur fournisseur;
-	@ManyToOne
-	private SousFamille sousfamille;
+	@Column(name="fournisseur")
+	private String fournisseur;
+	@Column(name="sousfamille")
+	private String sousfamille;
+	@Column(name="famille")
+	private String famille;
 	@Column(name="prix")
 	private double prix;
 	@Column(name="quantite")
@@ -50,30 +47,6 @@ public class MatiereAcquise {
 		this.designation = designation;
 	}
 
-	public FamilleProduit getFamilleProduit() {
-		return familleProduit;
-	}
-
-	public void setFamilleProduit(FamilleProduit familleProduit) {
-		this.familleProduit = familleProduit;
-	}
-
-	public Fournisseur getFournisseur() {
-		return fournisseur;
-	}
-
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
-	}
-
-	public SousFamille getSousfamille() {
-		return sousfamille;
-	}
-
-	public void setSousfamille(SousFamille sousfamille) {
-		this.sousfamille = sousfamille;
-	}
-
 	public double getPrix() {
 		return prix;
 	}
@@ -90,16 +63,49 @@ public class MatiereAcquise {
 		this.quantite = quantite;
 	}
 
-	public MatiereAcquise(String designation, FamilleProduit familleProduit, Fournisseur fournisseur,
-			SousFamille sousfamille, double prix, double quantite) {
+	public String getId_Matiere() {
+		return id_Matiere;
+	}
+
+	public void setId_Matiere(String id_Matiere) {
+		this.id_Matiere = id_Matiere;
+	}
+
+	public String getFournisseur() {
+		return fournisseur;
+	}
+
+	public void setFournisseur(String fournisseur) {
+		this.fournisseur = fournisseur;
+	}
+
+	public String getSousfamille() {
+		return sousfamille;
+	}
+
+	public void setSousfamille(String sousfamille) {
+		this.sousfamille = sousfamille;
+	}
+
+	public String getFamille() {
+		return famille;
+	}
+
+	public void setFamille(String famille) {
+		this.famille = famille;
+	}
+
+	public MatiereAcquise(String designation, String fournisseur, String sousfamille, String famille, double prix,
+			double quantite) {
 		super();
 		this.designation = designation;
-		this.familleProduit = familleProduit;
 		this.fournisseur = fournisseur;
 		this.sousfamille = sousfamille;
+		this.famille = famille;
 		this.prix = prix;
 		this.quantite = quantite;
 	}
+
 	
 	
 }

@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,27 +12,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Models.ProduitOuvrage;
-import com.example.demo.Repo.ProduitOuvrageRepo;
+import com.example.demo.Models.Operation;
+import com.example.demo.Repo.OperationRepo;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-public class ProduitOuvrageController {
-
+public class OperationController {
+	
 	@Autowired(required=true)
-	ProduitOuvrageRepo rep ;
+	OperationRepo rep ;
 
-
-	@GetMapping("/showAllproduitOuvrage")
-	public List<ProduitOuvrage> getAll(){
-	    List <ProduitOuvrage> produitOuvrage = this.rep.findAll();
-	    return produitOuvrage;
+	@GetMapping("/showAllOperation")
+	public List<Operation> getAll(){
+		return this.rep.findAll();
 	}
+	@RequestMapping(value = "/createOperation",method = RequestMethod.POST,consumes = {MediaType.APPLICATION_JSON_VALUE})
 	
-@RequestMapping(value = "/createproduitOuvrage",method = RequestMethod.POST,consumes = {MediaType.APPLICATION_JSON_VALUE})
-	
-	public ProduitOuvrage add(@RequestBody  ProduitOuvrage produitOuvrage ){
-		  return this.rep.save(produitOuvrage);
-      
+	public Operation add(@RequestBody  Operation operation ) throws IOException{
+	    return this.rep.save(operation);
     }
+
 }

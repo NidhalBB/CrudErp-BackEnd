@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -21,12 +19,10 @@ public class ProduitOuvrage {
 	private String id_Produit_Ouvrage;
 	@Column(name="designation")
 	private String designation;
-	@ManyToOne
-    @JoinColumn(name = "familleProduit", referencedColumnName = "idFamilleProduit")
-	private FamilleProduit familleProduit;
-	@ManyToOne
-    @JoinColumn(name = "sousfamille", referencedColumnName = "idSousFamille")
-	private SousFamille sousfamille;
+	@Column(name="sousfamille")
+	private String sousfamille;
+	@Column(name="famille")
+	private String famille;
 	
 	public ProduitOuvrage() {}
 
@@ -40,33 +36,33 @@ public class ProduitOuvrage {
 
 	public String getDesignation() {
 		return designation;
-	}
+	} 
 
 	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
 
-	public FamilleProduit getFamilleProduit() {
-		return familleProduit;
-	}
-
-	public void setFamilleProduit(FamilleProduit familleProduit) {
-		this.familleProduit = familleProduit;
-	}
-
-	public SousFamille getSousfamille() {
+	public String getSousfamille() {
 		return sousfamille;
 	}
 
-	public void setSousfamille(SousFamille sousfamille) {
+	public void setSousfamille(String sousfamille) {
 		this.sousfamille = sousfamille;
 	}
 
-	public ProduitOuvrage(String designation, FamilleProduit familleProduit, SousFamille sousfamille) {
+	public String getFamille() {
+		return famille;
+	}
+
+	public void setFamille(String famille) {
+		this.famille = famille;
+	}
+
+	public ProduitOuvrage(String designation, String sousfamille, String famille) {
 		super();
 		this.designation = designation;
-		this.familleProduit = familleProduit;
 		this.sousfamille = sousfamille;
+		this.famille = famille;
 	}
 	
 

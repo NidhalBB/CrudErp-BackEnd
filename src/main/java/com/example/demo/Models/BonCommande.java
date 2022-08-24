@@ -19,40 +19,76 @@ public class BonCommande {
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	@Column(name="id")
 	private String id ;
-	@Column(name="nomFournisseur")
-	private String nomFournisseur ;
-	@Column(name="designation_produit")
-	private String designation_produit ;
+	@Column(name="destinataire")
+	private String destinataire ;
+	@Column(name="adresse")
+	private String adresse ;
 	@Column(name="dateC")
 	private Date dateC ;
-	@Column(name="dateP")
-	private Date dateP ;
-	@Column(name="quantite_article")
-	private Date quantite_article ;
+	@Column(name="dateL")
+	private Date dateL ;
+	@Column(name="matricule")
+	private int matricule ;
 	
-	public BonCommande(String nomFournisseur, String designation_produit, Date dateC, Date dateP,
-			Date quantite_article) {
-		super();
-		this.nomFournisseur = nomFournisseur;
-		this.designation_produit = designation_produit;
-		this.dateC = dateC;
-		this.dateP = dateP;
-		this.quantite_article = quantite_article;
-	}
 	public BonCommande() {}
-	public BonCommande(String id, String nomFournisseur, String designation_produit, Date dateC, Date dateP,
-			Date quantite_article) {
+
+	public BonCommande(String destinataire, String adresse, Date dateC, Date dateL, int matricule) {
 		super();
-		this.id = id;
-		this.nomFournisseur = nomFournisseur;
-		this.designation_produit = designation_produit;
+		this.destinataire = destinataire;
+		this.adresse = adresse;
 		this.dateC = dateC;
-		this.dateP = dateP;
-		this.quantite_article = quantite_article;
+		this.dateL = dateL;
+		this.matricule = matricule;
 	}
-	
-	
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getDestinataire() {
+		return destinataire;
+	}
+
+	public void setDestinataire(String destinataire) {
+		this.destinataire = destinataire;
+	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public Date getDateC() {
+		return dateC;
+	}
+
+	public void setDateC(Date dateC) {
+		this.dateC = dateC;
+	}
+
+	public Date getDateL() {
+		return dateL;
+	}
+
+	public void setDateL(Date dateL) {
+		this.dateL = dateL;
+	}
+
+	public int getMatricule() {
+		return matricule;
+	}
+
+	public void setMatricule(int matricule) {
+		this.matricule = matricule;
+	}
+
 	
 	
 	

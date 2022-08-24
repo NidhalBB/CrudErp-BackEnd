@@ -18,6 +18,8 @@ public class Equipements {
 	private String id ;
 	@Column(name="nom")
 	private String nom;
+	@Column(name="famille")
+	private String famille;
 	@Column(name="longueur")
 	private double longueur;
 	@Column(name="largeur")
@@ -134,9 +136,16 @@ public class Equipements {
 	public void setGranulometrie(double granulometrie) {
 		this.granulometrie = granulometrie;
 	}
+	
+	public String getFamille() {
+		return famille;
+	}
+	public void setFamille(String famille) {
+		this.famille = famille;
+	}
 	public Equipements(String nom, double longueur, double largeur, double hauteur, double capacite,
 			double puissanceElectrique, double vitess, double epaisseur, double debit, double inclinaison,
-			double pression, double profondeur, double diametre, double granulometrie) {
+			double pression, double profondeur, double diametre, double granulometrie , String famille) {
 		super();
 		this.nom = nom;
 		this.longueur = longueur;
@@ -152,6 +161,7 @@ public class Equipements {
 		this.profondeur = profondeur;
 		this.diametre = diametre;
 		this.granulometrie = granulometrie;
+		this.famille = famille;
 	}
 	public Equipements() {}
 
