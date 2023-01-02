@@ -1,7 +1,5 @@
 package com.example.demo.Models;
 
-import java.time.LocalTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,12 +19,15 @@ public class Operation {
 	private String id_operation ;
 	@Column(name="designation")
 	private String designation;
-	@Column(name="etat")
-	private String etat;
 	@Column(name="machine")
 	private String machine;
 	@Column(name="temps")
-	private LocalTime temps;
+	private String temps;
+
+	@Column(name="type")
+	private String type;
+	@Column(name="poste")
+	private String poste;
 	public String getId_operation() {
 		return id_operation;
 	}
@@ -39,32 +40,40 @@ public class Operation {
 	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
-	public String getEtat() {
-		return etat;
-	}
-	public void setEtat(String etat) {
-		this.etat = etat;
-	}
 	public String getMachine() {
 		return machine;
 	}
 	public void setMachine(String machine) {
 		this.machine = machine;
 	}
-	public LocalTime getTemps() {
+	
+	public String getTemps() {
 		return temps;
 	}
-	public void setTemps(LocalTime temps) {
+	public void setTemps(String temps) {
 		this.temps = temps;
 	}
-	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getPoste() {
+		return poste;
+	}
+	public void setPoste(String poste) {
+		this.poste = poste;
+	}
 	public Operation() {}
-	public Operation(String designation, String etat, String machine, LocalTime temps) {
+	public Operation(String designation, String machine, String temps, String type, String poste) {
 		super();
 		this.designation = designation;
-		this.etat = etat;
 		this.machine = machine;
 		this.temps = temps;
+		this.type = type;
+		this.poste = poste;
 	}
+	
 	
 }

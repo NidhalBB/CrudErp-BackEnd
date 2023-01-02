@@ -1,16 +1,26 @@
 package com.example.demo.Models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "MatiereAcquise")
-public class MatiereAcquise {
+public class MatiereAcquise implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
@@ -18,12 +28,20 @@ public class MatiereAcquise {
 	private String id_Matiere ;
 	@Column(name="designation")
 	private String designation;
-	@Column(name="fournisseur")
-	private String fournisseur;
-	@Column(name="sousfamille")
-	private String sousfamille;
-	@Column(name="famille")
-	private String famille;
+	@ManyToOne
+	 @Cascade(CascadeType.SAVE_UPDATE)
+	    @JoinColumn(name="fournisseur_id", nullable=false)
+	    private Fournisseur fournisseur;
+	
+	@ManyToOne
+	 @Cascade(CascadeType.SAVE_UPDATE)
+	    @JoinColumn(name="mAcquise_id", nullable=false)
+	    private SousFamille mAcquise;
+	
+	@ManyToOne
+	 @Cascade(CascadeType.SAVE_UPDATE)
+	    @JoinColumn(name="matiereAcquise_id", nullable=false)
+	    private Famille matiereAcquise;
 	@Column(name="prix")
 	private double prix;
 	@Column(name="quantite")
@@ -71,41 +89,42 @@ public class MatiereAcquise {
 		this.id_Matiere = id_Matiere;
 	}
 
-	public String getFournisseur() {
+	
+	public Famille getMatiereAcquise() {
+		return matiereAcquise;
+	}
+
+	public void setMatiereAcquise(Famille matiereAcquise) {
+		this.matiereAcquise = matiereAcquise;
+	}
+
+	public Fournisseur getFournisseur() {
 		return fournisseur;
 	}
 
-	public void setFournisseur(String fournisseur) {
+	public void setFournisseur(Fournisseur fournisseur) {
 		this.fournisseur = fournisseur;
 	}
 
-	public String getSousfamille() {
-		return sousfamille;
+	public SousFamille getmAcquise() {
+		return mAcquise;
 	}
 
-	public void setSousfamille(String sousfamille) {
-		this.sousfamille = sousfamille;
+	public void setmAcquise(SousFamille mAcquise) {
+		this.mAcquise = mAcquise;
 	}
 
-	public String getFamille() {
-		return famille;
-	}
-
-	public void setFamille(String famille) {
-		this.famille = famille;
-	}
-
-	public MatiereAcquise(String designation, String fournisseur, String sousfamille, String famille, double prix,
-			double quantite) {
+	public MatiereAcquise(String id_Matiere, String designation, Fournisseur fournisseur, SousFamille mAcquise,
+			Famille matiereAcquise, double prix, double quantite) {
 		super();
+		this.id_Matiere = id_Matiere;
 		this.designation = designation;
 		this.fournisseur = fournisseur;
-		this.sousfamille = sousfamille;
-		this.famille = famille;
+		this.mAcquise = mAcquise;
+		this.matiereAcquise = matiereAcquise;
 		this.prix = prix;
 		this.quantite = quantite;
 	}
 
-	
 	
 }

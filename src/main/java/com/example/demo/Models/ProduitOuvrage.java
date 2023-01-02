@@ -4,8 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -19,11 +23,37 @@ public class ProduitOuvrage {
 	private String id_Produit_Ouvrage;
 	@Column(name="designation")
 	private String designation;
-	@Column(name="sousfamille")
-	private String sousfamille;
-	@Column(name="famille")
-	private String famille;
+	@ManyToOne
+	 @Cascade(CascadeType.DELETE)
+	    @JoinColumn(name="pOuvrage_id", nullable=false)
+	    private SousFamille pOuvrage;
 	
+	@ManyToOne
+	 @Cascade(CascadeType.DELETE)
+	    @JoinColumn(name="produitOuvrage_id", nullable=false)
+	    private Famille produitOuvrage;
+	@Column(name="quantite")
+	private double quantite;
+	@Column(name="prix")
+	private double prix;
+	
+	
+	public double getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(double quantite) {
+		this.quantite = quantite;
+	}
+
+	public double getPrix() {
+		return prix;
+	}
+
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
+
 	public ProduitOuvrage() {}
 
 	public String getId_Produit_Ouvrage() {
@@ -42,28 +72,34 @@ public class ProduitOuvrage {
 		this.designation = designation;
 	}
 
-	public String getSousfamille() {
-		return sousfamille;
+
+	public SousFamille getpOuvrage() {
+		return pOuvrage;
 	}
 
-	public void setSousfamille(String sousfamille) {
-		this.sousfamille = sousfamille;
+	public void setpOuvrage(SousFamille pOuvrage) {
+		this.pOuvrage = pOuvrage;
 	}
 
-	public String getFamille() {
-		return famille;
+	public Famille getProduitOuvrage() {
+		return produitOuvrage;
 	}
 
-	public void setFamille(String famille) {
-		this.famille = famille;
+	public void setProduitOuvrage(Famille produitOuvrage) {
+		this.produitOuvrage = produitOuvrage;
 	}
 
-	public ProduitOuvrage(String designation, String sousfamille, String famille) {
+	public ProduitOuvrage(String id_Produit_Ouvrage, String designation, SousFamille pOuvrage, Famille produitOuvrage,
+			double quantite, double prix) {
 		super();
+		this.id_Produit_Ouvrage = id_Produit_Ouvrage;
 		this.designation = designation;
-		this.sousfamille = sousfamille;
-		this.famille = famille;
+		this.pOuvrage = pOuvrage;
+		this.produitOuvrage = produitOuvrage;
+		this.quantite = quantite;
+		this.prix = prix;
 	}
+
 	
 
 }

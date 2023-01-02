@@ -1,7 +1,6 @@
 package com.example.demo.Models;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -29,6 +28,17 @@ public class Famille implements Serializable{
 		@Column(name="designationfamille")
 		private String designation_famille;
 		
+		@OneToMany(mappedBy="sousFamille" , fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	    private Set<SousFamille> sousFamilles;
+		
+		@OneToMany(mappedBy="produitSemiFini" , fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	    private Set<ProduitSemiFini> produitSemiFinis;
+		
+		@OneToMany(mappedBy="produitOuvrage" , fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	    private Set<ProduitOuvrage> produitOuvrages;
+		
+		@OneToMany(mappedBy="matiereAcquise" , fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	    private Set<MatiereAcquise> matiereAcquises;
 		
 		public Famille() {}
 

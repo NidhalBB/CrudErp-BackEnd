@@ -4,10 +4,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(value=Include.NON_NULL)
 @Entity
 @Table(name = "equipements")
 public class Equipements {
@@ -18,8 +26,12 @@ public class Equipements {
 	private String id ;
 	@Column(name="nom")
 	private String nom;
-	@Column(name="famille")
-	private String famille;
+
+	 @ManyToOne
+	 @Cascade(CascadeType.SAVE_UPDATE)
+	    @JoinColumn(name="famille_id", nullable=false)
+	    private FamilleMachine equipement;
+	 
 	@Column(name="longueur")
 	private double longueur;
 	@Column(name="largeur")
@@ -137,17 +149,19 @@ public class Equipements {
 		this.granulometrie = granulometrie;
 	}
 	
-	public String getFamille() {
-		return famille;
+	public FamilleMachine getEquipement() {
+		return equipement;
 	}
-	public void setFamille(String famille) {
-		this.famille = famille;
+	public void setEquipement(FamilleMachine equipement) {
+		this.equipement = equipement;
 	}
-	public Equipements(String nom, double longueur, double largeur, double hauteur, double capacite,
-			double puissanceElectrique, double vitess, double epaisseur, double debit, double inclinaison,
-			double pression, double profondeur, double diametre, double granulometrie , String famille) {
+	
+	public Equipements(String nom, FamilleMachine equipement, double longueur, double largeur, double hauteur,
+			double capacite, double puissanceElectrique, double vitess, double epaisseur, double debit,
+			double inclinaison, double pression, double profondeur, double diametre, double granulometrie) {
 		super();
 		this.nom = nom;
+		this.equipement = equipement;
 		this.longueur = longueur;
 		this.largeur = largeur;
 		this.hauteur = hauteur;
@@ -161,7 +175,6 @@ public class Equipements {
 		this.profondeur = profondeur;
 		this.diametre = diametre;
 		this.granulometrie = granulometrie;
-		this.famille = famille;
 	}
 	public Equipements() {}
 

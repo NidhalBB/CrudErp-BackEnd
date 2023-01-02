@@ -51,8 +51,7 @@ public class EquipementsController {
     }
 	
 	@DeleteMapping("/equipement/{id}")
-	public ResponseEntity<String> delete(@PathVariable("id") String id) {
+	public void delete(@PathVariable("id") String id) {
 		this.rep.deleteById(id);
-		return new ResponseEntity<String>("Equipement is deleted successfully.!", HttpStatus.OK);
 	}
 }

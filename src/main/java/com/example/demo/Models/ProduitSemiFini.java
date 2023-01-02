@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -21,21 +23,50 @@ public class ProduitSemiFini {
 	private String id_Produit_Semi_Fini ;
 	@Column(name="designation")
 	private String designation;
-	@Column(name="sousfamille")
-	private String sousfamille;
-	@Column(name="famille")
-	private String famille;
+	@ManyToOne
+	 @Cascade(CascadeType.SAVE_UPDATE)
+	    @JoinColumn(name="pSemiFini_id", nullable=false)
+	    private SousFamille pSemiFini;
+	
+	 @ManyToOne
+	 @Cascade(CascadeType.SAVE_UPDATE)
+	    @JoinColumn(name="produitSemiFini_id", nullable=false)
+	    private Famille produitSemiFini;
 	
 	public ProduitSemiFini() {}
 
 	
 
-	public ProduitSemiFini(String designation, String sousfamille, String famille) {
+
+
+
+
+	public ProduitSemiFini(String id_Produit_Semi_Fini, String designation, SousFamille pSemiFini,
+			Famille produitSemiFini) {
 		super();
+		this.id_Produit_Semi_Fini = id_Produit_Semi_Fini;
 		this.designation = designation;
-		this.sousfamille = sousfamille;
-		this.famille = famille;
+		this.pSemiFini = pSemiFini;
+		this.produitSemiFini = produitSemiFini;
 	}
+
+
+
+
+
+
+
+	public Famille getProduitSemiFini() {
+		return produitSemiFini;
+	}
+
+
+
+
+	public void setProduitSemiFini(Famille produitSemiFini) {
+		this.produitSemiFini = produitSemiFini;
+	}
+
 
 
 
@@ -55,29 +86,14 @@ public class ProduitSemiFini {
 		this.designation = designation;
 	}
 
+	public SousFamille getpSemiFini() {
+		return pSemiFini;
+	}
 
-
-	public String getSousfamille() {
-		return sousfamille;
+	public void setpSemiFini(SousFamille pSemiFini) {
+		this.pSemiFini = pSemiFini;
 	}
 
 
-
-	public void setSousfamille(String sousfamille) {
-		this.sousfamille = sousfamille;
-	}
-
-
-
-	public String getFamille() {
-		return famille;
-	}
-
-
-
-	public void setFamille(String famille) {
-		this.famille = famille;
-	}
-	
 	
 }

@@ -2,6 +2,7 @@ package com.example.demo.Models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,16 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "sousFamilles")
@@ -39,22 +34,44 @@ public class SousFamille implements Serializable{
 	@Column(name="designation")
 	private String designation;
 	
-	private String famille;
+	 @ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.MERGE)
+	    @JoinColumn(name="sousFamille_id", nullable=false)
+	    private Famille sousFamille;
 	
-	public String getFamilleProduit() {
-		return famille;
-	}
-	public void setFamilleProduit(String familleProduit) {
-		this.famille = familleProduit;
-	}
+	 	@OneToMany(mappedBy="pSemiFini" , fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	    private Set<ProduitSemiFini> pSemiFinis;
+		
+		@OneToMany(mappedBy="pOuvrage" , fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	    private Set<ProduitOuvrage> pOuvrages;
+		
+		@OneToMany(mappedBy="mAcquise" , fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	    private Set<MatiereAcquise> mAcquises;
+		
+	 
 	public SousFamille() {}
 	
 	
-	public SousFamille(String designation, String famille) {
+	
+	public SousFamille(String designation, Famille sousFamille) {
 		super();
 		this.designation = designation;
-		this.famille = famille;
+		this.sousFamille = sousFamille;
 	}
+
+
+
+	public Famille getSousFamille() {
+		return sousFamille;
+	}
+
+
+
+	public void setSousFamille(Famille sousFamille) {
+		this.sousFamille = sousFamille;
+	}
+
+
+
 	public String getId_SousFamille() {
 		return id_SousFamille;
 	}
